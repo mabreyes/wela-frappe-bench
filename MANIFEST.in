@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include wela_analytics *.css
+recursive-include wela_analytics *.csv
+recursive-include wela_analytics *.html
+recursive-include wela_analytics *.ico
+recursive-include wela_analytics *.js
+recursive-include wela_analytics *.json
+recursive-include wela_analytics *.md
+recursive-include wela_analytics *.png
+recursive-include wela_analytics *.py
+recursive-include wela_analytics *.svg
+recursive-include wela_analytics *.txt
+recursive-exclude wela_analytics *.pyc
