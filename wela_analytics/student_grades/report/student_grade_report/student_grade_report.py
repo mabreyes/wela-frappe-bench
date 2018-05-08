@@ -6,11 +6,11 @@ import frappe
 
 
 def execute(filters=None):
-    columns, data = get_student_list(filters.get('avg_gr'), filters.get('qtr'))
+    columns, data = get_student_list(filters.get('qtr'))
     return columns, data
 
 
-def get_student_list(avg_gr, qtr):
+def get_student_list(qtr):
     columns = [
         {
             "label": "Full Name",
@@ -53,15 +53,16 @@ def get_student_list(avg_gr, qtr):
             "fieldname": "avg_gr"
         }
     ]
-    data = frappe.get_list('Student Grade',
-                           filters={'avg_gr': avg_gr, 'qtr': qtr},
-                           fields=['full_name',
-                                   'qtr',
-                                   'eng_gr',
-                                   'mat_gr',
-                                   'fil_gr',
-                                   'sci_gr',
-                                   'ss_gr',
-                                   'avg_gr'])
 
-    return columns, data
+    get_student_list_sql = """SELECT full_name, qtr, eng_gr, mat_gr, fil_gr, sci_gr, ss_gr, avg_gr
+                                FROM `tabStudent Grade`"""
+
+    if qtr:
+        get_student_list_sql = """SELECT full_name, qtr, eng_gr, mat_gr, fil_gr, sci_gr, ss_gr, avg_gr
+                                FROM `tabStudent Grade` {where}"""
+
+        get_student_list_sql = get_student_list_sql.replace(
+            "{where}", "WHERE qtr='{}'".format(qtr))
+
+    result = frappe.db.sql(get_student_list_sql, as_dict=True)
+    return columns, result

@@ -57,15 +57,8 @@ frappe.query_reports["Student_Grade_Report"] = {
 			"label": __("Quarter"),
 			"fieldtype": "Link",
 			"options": "Grade Quarter",
-			"reqd": 1,
-			"width": 20,
-			"default": 'First Quarter',
-		},
-		{
-			"fieldname": "avg_gr",
-			"label": __("Average"),
-			"fieldtype": "Int",
 			"reqd": 0,
+			"width": 20,
 		}
 	]
 }
