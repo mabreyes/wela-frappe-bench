@@ -89,7 +89,9 @@ def show_student_grade_history(student, school_year, subject_short):
 									GROUP BY tabw_student_grade.subject_name;
 	                                """
         student_grade_history_sql = student_grade_history_sql.replace("{where}",
-                                                                      "WHERE tabw_students.name='{}'".format(student))
+                                                                      "WHERE tabw_students.name='{0}' \
+																	  OR tabw_student_full.school_year='{1}' \
+																	  OR tabw_student_grade.subject_name LIKE '{2}%'".format(student, school_year, subject_short))
 
     result = frappe.db.sql(student_grade_history_sql, as_dict=True)
 
