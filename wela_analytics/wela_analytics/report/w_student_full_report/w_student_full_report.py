@@ -89,9 +89,48 @@ def show_student_grade_history(student, school_year, subject_short):
 									GROUP BY tabw_student_grade.subject_name;
 	                                """
         student_grade_history_sql = student_grade_history_sql.replace("{where}",
+                                                                      "WHERE tabw_students.name='{0}'".format(student))
+
+    if school_year:
+        student_grade_history_sql = """SELECT tabw_students.name, 
+		                            tabw_students.full_name, 
+								    tabw_student_full.school_year, 
+								    tabw_student_grade.subject_name, 
+								    tabw_student_grade.first_quarter_grade, 
+								    tabw_student_grade.second_quarter_grade, 
+								    tabw_student_grade.third_quarter_grade, 
+								    tabw_student_grade.fourth_quarter_grade 
+								    FROM tabw_students 
+								    LEFT JOIN tabw_student_full 
+								    ON tabw_students.name = tabw_student_full.student_name 
+								    LEFT JOIN tabw_student_grade 
+								    ON tabw_student_full.name = tabw_student_grade.parent {where}
+									GROUP BY tabw_student_grade.subject_name;
+	                                """
+        student_grade_history_sql = student_grade_history_sql.replace("{where}",
                                                                       "WHERE tabw_students.name='{0}' \
-																	  OR tabw_student_full.school_year='{1}' \
-																	  OR tabw_student_grade.subject_name LIKE '{2}%'".format(student, school_year, subject_short))
+																	   AND tabw_student_full.school_year='{1}'".format(student, school_year))
+
+    if subject_short:
+        student_grade_history_sql = """SELECT tabw_students.name, 
+		                            tabw_students.full_name, 
+								    tabw_student_full.school_year, 
+								    tabw_student_grade.subject_name, 
+								    tabw_student_grade.first_quarter_grade, 
+								    tabw_student_grade.second_quarter_grade, 
+								    tabw_student_grade.third_quarter_grade, 
+								    tabw_student_grade.fourth_quarter_grade 
+								    FROM tabw_students 
+								    LEFT JOIN tabw_student_full 
+								    ON tabw_students.name = tabw_student_full.student_name 
+								    LEFT JOIN tabw_student_grade 
+								    ON tabw_student_full.name = tabw_student_grade.parent {where}
+									GROUP BY tabw_student_grade.subject_name;
+	                                """
+        student_grade_history_sql = student_grade_history_sql.replace("{where}",
+                                                                      "WHERE tabw_students.name='{0}' \
+																	   AND tabw_student_full.school_year='{1}' \
+																	   AND tabw_student_grade.subject_name LIKE '{2}%'".format(student, school_year, subject_short))
 
     result = frappe.db.sql(student_grade_history_sql, as_dict=True)
 
