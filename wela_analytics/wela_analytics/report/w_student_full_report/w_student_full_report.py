@@ -109,7 +109,7 @@ def show_student_grade_history(student, school_year, subject_short):
 	                                """
         student_grade_history_sql = student_grade_history_sql.replace("{where}",
                                                                       "WHERE tabw_students.name='{0}' \
-																	   AND tabw_student_full.school_year='{1}'".format(student, school_year))
+																	  AND tabw_student_full.school_year='{1}'".format(student, school_year))
 
     if subject_short:
         student_grade_history_sql = """SELECT tabw_students.name, 
@@ -129,8 +129,7 @@ def show_student_grade_history(student, school_year, subject_short):
 	                                """
         student_grade_history_sql = student_grade_history_sql.replace("{where}",
                                                                       "WHERE tabw_students.name='{0}' \
-																	   AND tabw_student_full.school_year='{1}' \
-																	   AND tabw_student_grade.subject_name LIKE '{2}%'".format(student, school_year, subject_short))
+																	  AND tabw_student_grade.subject_name LIKE '{1}%'".format(student, subject_short))
 
     result = frappe.db.sql(student_grade_history_sql, as_dict=True)
 

@@ -9,8 +9,9 @@ frappe.query_reports["w_student_full_report"] = {
 			"label": __("Student Code"),
 			"fieldtype": "Link",
 			"options": "w_students",
-			"reqd": 0,
+			"reqd": 1,
 			"width": 20,
+			"default": "w_student_004"
 		},
 		{
 			"fieldname": "w_school_year",
