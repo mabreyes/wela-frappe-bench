@@ -1,0 +1,26 @@
+<!-- {% for (var i=0, l=data.length; i
+< l; i++) { var row=data[i]; %} <h1>{%= row.full_name %}
+    </h1>
+    <hr> {% } %}
+    <h5>English Grade History</h5> -->
+<table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
+    <thead>
+        <tr style="background-color: #dddddd; font-weight: bold;">
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">Subject</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">First Quarter</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">Second Quarter</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">Third Quarter</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">Fourth Quarter</td>
+        </tr>
+    </thead>
+    <tbody>{% for (var i=0, l=data.length; i
+        < l; i++) { %} <tr>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">{%= row.subject_name %}</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">{%= row.first_quarter_grade %}</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">{%= row.second_quarter_grade %}</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">{%= row.third_quarter_grade %}</td>
+            <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">{%= row.fourth_quarter_grade %}</td>
+            </tr>
+            {% } %}
+    </tbody>
+</table>
