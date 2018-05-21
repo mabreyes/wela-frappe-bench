@@ -15,16 +15,18 @@ def execute(filters=None):
 
     data_for_chart = remove_brackets(data_for_chart)
 
-    # chart = show_data(columns, data_for_chart.get('first_quarter_grade'),
-    #                   data_for_chart.get('second_quarter_grade'),
-    #                   data_for_chart.get('third_quarter_grade'),
-    #                   data_for_chart.get('fourth_quarter_grade'))
+    chart = show_data(columns, data_for_chart.get('first_quarter_grade'),
+                      data_for_chart.get('second_quarter_grade'),
+                      data_for_chart.get('third_quarter_grade'),
+                      data_for_chart.get('fourth_quarter_grade'))
     print(data_for_chart)
     return columns, data
 
 
 def remove_brackets(list):
-    return ast.literal_eval(str(list).replace('[', '').replace(']', ''))
+    list = str(list).replace('[', '').replace(']', '')
+    list_n = ast.literal_eval('"' + list + '"')
+    return list_n
 
 
 def show_student_grade_history(student, school_year, subject_short):
