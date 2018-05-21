@@ -11,15 +11,7 @@ def execute(filters=None):
         filters.get('w_student'), filters.get('w_school_year'),
         filters.get('w_subject_short'))
 
-    data_for_chart = data[:]
-
-    data_for_chart = remove_brackets(data_for_chart)
-
-    chart = show_data(columns, data_for_chart.get('first_quarter_grade'),
-                      data_for_chart.get('second_quarter_grade'),
-                      data_for_chart.get('third_quarter_grade'),
-                      data_for_chart.get('fourth_quarter_grade'))
-    print(data_for_chart)
+    # print(data_for_chart)
     return columns, data
 
 
@@ -149,7 +141,15 @@ def show_student_grade_history(student, school_year, subject_short):
 																	  AND tabw_student_grade.subject_name LIKE '{1}%'".format(student, subject_short))
 
     result = frappe.db.sql(student_grade_history_sql, as_dict=True)
-    print(result)
+
+    # c_result = dict(remove_brackets(result[:]))
+
+    # chart = show_data(columns, c_result.get('first_quarter_grade'),
+    #                   c_result.get('second_quarter_grade'),
+    #                   c_result.get('third_quarter_grade'),
+    #                   c_result.get('fourth_quarter_grade'))
+
+    # print(c_result)
     return columns, result
 
 
